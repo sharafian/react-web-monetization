@@ -2,7 +2,8 @@
   "name": "react-web-monetization",
   "version": "0.0.1",
   "description": "React provider for web monetization",
-  "main": "index.js",
+  "main": "build/react-web-monetization.js",
+  "module": "build/react-web-monetization.module.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV='production' rollup -c rollup.config.babel.js"
