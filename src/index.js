@@ -1,4 +1,4 @@
-import React, { Component, PropTypes, Children } from 'react'
+import { Component, PropTypes, Children } from 'react'
 
 export class WebMonetizationProvider extends Component {
   state = {
