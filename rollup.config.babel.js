@@ -15,7 +15,7 @@ export default {
       file: './build/react-web-monetization.js',
       name: 'ReactWebMonetization',
       sourcemap: true,
-      format: 'umd',
+      format: 'cjs',
       globals
     },
     {

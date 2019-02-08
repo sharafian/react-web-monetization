@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export function useWebMonetizationState () {
+export function useMonetizationState () {
   const [monetizationState, setMonetizationState] = useState({
     state: document.monetization && document.monetization.state,
     paymentPointer: null,

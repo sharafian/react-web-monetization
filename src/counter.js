@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export function useWebMonetizationCounter () {
+export function useMonetizationCounter () {
   const [monetizationDetails, setMonetizationDetails] = useState({
     state: document.monetization && document.monetization.state,
     paymentPointer: null,

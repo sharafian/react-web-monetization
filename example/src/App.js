@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-// import { useWebMonetizationCounter } from 'react-web-monetization';
-import { useWebMonetizationCounter } from './counter';
-import { useWebMonetizationState } from './state';
+import { useMonetizationState, useMonetizationCounter } from 'react-web-monetization';
 
 const ObjectTable = ({ obj }) => <table>
   <thead>
@@ -21,8 +19,8 @@ const ObjectTable = ({ obj }) => <table>
 </table>
 
 const App = () => {
-  const monetizationDetails = useWebMonetizationCounter()
-  const monetizationState = useWebMonetizationState()
+  const monetizationDetails = useMonetizationCounter()
+  const monetizationState = useMonetizationState()
 
   return <div>
     <h1>React Web Monetization</h1>
