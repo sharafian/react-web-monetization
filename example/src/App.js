@@ -1,36 +1,13 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { useMonetizationState, useMonetizationCounter } from 'react-web-monetization';
+import React from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Details from './Details'
+import List from './List'
 
-const ObjectTable = ({ obj }) => <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    {Object.keys(obj).map(key => <tr>
-      <td>{key}</td>
-      <td>{String(obj[key])}</td>
-    </tr>)}
-  </tbody>
-</table>
-
-const App = () => {
-  const monetizationDetails = useMonetizationCounter()
-  const monetizationState = useMonetizationState()
-
-  return <div>
-    <h1>React Web Monetization</h1>
-
-    <h2>Web Monetization State</h2>
-    <ObjectTable obj={monetizationState} />
-
-    <h2>Web Monetization Counter</h2>
-    <ObjectTable obj={monetizationDetails} />
-  </div>
-}
+const App = () => <BrowserRouter>
+  <Switch>
+    <Route path='/details' component={Details} />
+    <Route component={List} />
+  </Switch>
+</BrowserRouter>
 
 export default App;
