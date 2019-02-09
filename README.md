@@ -27,6 +27,8 @@ For a specification of this meta tag, see [Interledger RFC
 
 ### Web Monetization State Hook
 
+This hook will update when the first web-monetization micropayment occurs on the page and the state goes from `pending` to `started`.
+
 ```jsx
 import React from 'react'
 import { useMonetizationState } from 'react-web-monetization'
@@ -42,4 +44,29 @@ const MyMessage = props => {
 }
 
 export default MyMessage
+```
+
+### Web Monetization Counter Hook
+
+This hook will update on each web-monetization micropayment that occurs. It
+tracks a running total for how much has been paid out to the page.
+
+You should only use this hook if you're updating on every micropayment. If you
+only need a boolean on whether or not payment is happening, use
+[useMonetizationState](#web-monetization-state-hook)
+
+```jsx
+import React from 'react'
+import { useMonetizationState } from 'react-web-monetization'
+
+const MyCounter = props => {
+  const monetization = useMonetizationState()
+
+  return <p>
+    {(monetization.totalAmount / (10 ** monetization.assetScale)).toFixed(monetization.assetScale)}
+    {monetization.assetCode}
+  </p>
+}
+
+export default MyCounter
 ```
