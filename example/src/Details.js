@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { useMonetizationState, useMonetizationCounter } from 'react-web-monetization';
+import { useMonetizationState, useMonetizationCounter } from 'react-web-monetization'
 
 const ObjectTable = ({ obj }) => <table>
   <thead>
@@ -21,7 +21,7 @@ const Details = () => {
   const monetizationDetails = useMonetizationCounter()
   const monetizationState = useMonetizationState()
 
-  return <div>
+  return <>
     <h1>React Web Monetization</h1>
     <Link to='/'>List</Link>
 
@@ -30,7 +30,7 @@ const Details = () => {
 
     <h2>Web Monetization Counter</h2>
     <ObjectTable obj={monetizationDetails} />
-  </div>
+  </>
 }
 
-export default Details;
+export default Details
