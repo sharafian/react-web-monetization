@@ -4,8 +4,7 @@ export function useMonetizationState () {
   const [monetizationState, setMonetizationState] = useState({
     state: document.monetization && document.monetization.state,
     paymentPointer: null,
-    requestId: null,
-    hasPaid: false,
+    requestId: null
   })
 
   useEffect(() => {
@@ -17,8 +16,7 @@ export function useMonetizationState () {
       setMonetizationState({
         state: document.monetization.state,
         paymentPointer,
-        requestId,
-        hasPaid: true
+        requestId
       })
     }
 

@@ -7,8 +7,7 @@ export function useMonetizationCounter () {
     requestId: null,
     assetCode: null,
     assetScale: null,
-    totalAmount: 0,
-    hasPaid: false
+    totalAmount: 0
   })
 
   // create something we can mutate
@@ -38,8 +37,7 @@ export function useMonetizationCounter () {
       setMonetizationDetails(Object.assign(monetizationDetailsCopy, {
         totalAmount: totalAmount + Number(amount),
         assetCode,
-        assetScale,
-        hasPaid: true
+        assetScale
       }))
     }
 
