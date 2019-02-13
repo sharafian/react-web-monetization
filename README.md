@@ -3,11 +3,11 @@
 
 ## Examples
 
-This repo contains several usage examples in `examples/`. To host the site and
+This repo contains several usage examples in `example/`. To host the site and
 view the examples, run:
 
 ```
-cd examples
+cd example
 npm install
 npm start
 ```
@@ -57,10 +57,10 @@ only need a boolean on whether or not payment is happening, use
 
 ```jsx
 import React from 'react'
-import { useMonetizationState } from 'react-web-monetization'
+import { useMonetizationCounter } from 'react-web-monetization'
 
 const MyCounter = props => {
-  const monetization = useMonetizationState()
+  const monetization = useMonetizationCounter()
 
   return <p>
     {(monetization.totalAmount / (10 ** monetization.assetScale)).toFixed(monetization.assetScale)}
