@@ -70,3 +70,17 @@ const MyCounter = props => {
 
 export default MyCounter
 ```
+
+### Init Global Web Monetization State
+
+Sometimes you don't load in any monetization hooks at page load, but you want
+to start listening for web monetization events anyways. You can use the
+`initGlobalWebMonetizationState` function to force the module to start
+listening for global web monetization events.
+
+```jsx
+import React from 'react'
+import { initGlobalWebMonetizationState } from 'react-web-monetization'
+
+initGlobalWebMonetizationState()
+```
