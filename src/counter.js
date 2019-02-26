@@ -1,52 +1,40 @@
 import React, { useState, useEffect } from 'react'
+import { getGlobalWebMonetizationState } from './global'
 
 export function useMonetizationCounter () {
-  const [monetizationDetails, setMonetizationDetails] = useState({
-    state: document.monetization && document.monetization.state,
-    paymentPointer: null,
-    requestId: null,
-    assetCode: null,
-    assetScale: null,
-    totalAmount: 0
-  })
+  // get the singleton WM state
+  const webMonetizationState = getGlobalWebMonetizationState()
+  webMonetizationState.init()
+
+  const [monetizationDetails, setMonetizationDetails] = useState(webMonetizationState.getState())
 
   // create something we can mutate
   const monetizationDetailsCopy = Object.assign({}, monetizationDetails)
 
   useEffect(() => {
-    if (!document.monetization) return
-
-    const onMonetizationStart = ev => {
-      const { paymentPointer, requestId } = ev.detail
-
+    const onMonetizationStart = () => {
       // this is purposely mutating because sometimes we get multiple state
       // updates before reload
-      setMonetizationDetails(Object.assign(monetizationDetailsCopy, {
-        state: document.monetization.state,
-        paymentPointer,
-        requestId
-      }))
+      setMonetizationDetails(Object.assign(
+        monetizationDetailsCopy,
+        webMonetizationState.getState()))
     }
 
-    const onMonetizationProgress = ev => {
-      const { amount, assetCode, assetScale } = ev.detail
-      const { totalAmount } = monetizationDetails
-
+    const onMonetizationProgress = () => {
       // this is purposely mutating because sometimes we get multiple state
       // updates before reload
-      setMonetizationDetails(Object.assign(monetizationDetailsCopy, {
-        totalAmount: totalAmount + Number(amount),
-        assetCode,
-        assetScale
-      }))
+      setMonetizationDetails(Object.assign(
+        monetizationDetailsCopy,
+        webMonetizationState.getState()
+      ))
     }
 
-    document.monetization.addEventListener('monetizationstart', onMonetizationStart)
-    document.monetization.addEventListener('monetizationprogress', onMonetizationProgress)
+    webMonetizationState.on('monetizationstart', onMonetizationStart)
+    webMonetizationState.on('monetizationprogress', onMonetizationProgress)
 
     return () => {
-      document.monetization.removeEventListener('monetizationstart', onMonetizationStart)
-      document.monetization.removeEventListener('monetizationprogress', onMonetizationProgress)
+      webMonetizationState.removeListener('monetizationstart', onMonetizationStart)
+      webMonetizationState.removeListener('monetizationprogress', onMonetizationProgress)
     }
   })
 
