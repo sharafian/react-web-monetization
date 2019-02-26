@@ -69,3 +69,7 @@ export function getGlobalWebMonetizationState () {
   }
   return globalWebMonetizationState
 }
+
+export function initGlobalWebMonetizationState () {
+  getGlobalWebMonetizationState().init()
+}
