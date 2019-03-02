@@ -71,6 +71,39 @@ const MyCounter = props => {
 export default MyCounter
 ```
 
+### Web Monetization Conditional Components
+
+Web Monetization Conditional Components allow you to wrap react components so
+that they display if Web Monetization is enabled/disabled/pending.
+
+They're intended for simple situations where you don't want to write the same
+code using hooks over and over. Their functionality can easily be replicated by
+using the [Web Monetization State](#web-monetization-state) hook.
+
+[See an example of their usage here.](example/src/Conditional.js)
+
+```jsx
+import React from 'react'
+import { IfWebMonetized } from 'react-web-monetization'
+
+const MyMessage = props => {
+  return <IfWebMonetized>
+    <p>Thanks for supporting me!</p>
+  </IfWebMonetized>
+}
+```
+
+```jsx
+import React from 'react'
+import { IfNotWebMonetized } from 'react-web-monetization'
+
+const MyMessage = props => {
+  return <IfNotWebMonetized>
+    <p>Please support me with Web Monetization!</p>
+  </IfNotWebMonetized>
+}
+```
+
 ### Init Global Web Monetization State
 
 Sometimes you don't load in any monetization hooks at page load, but you want
