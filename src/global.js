@@ -47,6 +47,7 @@ export class GlobalWebMonetizationState extends EventEmitter {
   onMonetizationStart (ev) {
     const { paymentPointer, requestId } = ev.detail
 
+    this.state = document.monetization && document.monetization.state
     this.paymentPointer = paymentPointer
     this.requestId = requestId
     this.emit('monetizationstart')
