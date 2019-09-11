@@ -5,7 +5,7 @@ export class GlobalWebMonetizationState extends EventEmitter {
   constructor () {
     super()
 
-    this.state = document.monetization && document.monetization.state
+    this.state = (typeof document !== 'undefined') && document.monetization && document.monetization.state
     this.paymentPointer = null
     this.requestId = null
     this.assetCode = null
@@ -29,7 +29,7 @@ export class GlobalWebMonetizationState extends EventEmitter {
   }
 
   init () {
-    if (!this.initialized && document.monetization) {
+    if (!this.initialized && (typeof document !== 'undefined') && document.monetization) {
       this.initialized = true
       document.monetization.addEventListener('monetizationstart', this.boundMonetizationStart)
       document.monetization.addEventListener('monetizationprogress', this.boundMonetizationProgress)
@@ -37,7 +37,7 @@ export class GlobalWebMonetizationState extends EventEmitter {
   }
 
   terminate () {
-    if (this.initialized && document.monetization) {
+    if (this.initialized && (typeof document !== 'undefined') && document.monetization) {
       this.initialized = false
       document.monetization.removeEventListener('monetizationstart', this.boundMonetizationStart)
       document.monetization.removeEventListener('monetizationprogress', this.boundMonetizationProgress)
@@ -47,7 +47,7 @@ export class GlobalWebMonetizationState extends EventEmitter {
   onMonetizationStart (ev) {
     const { paymentPointer, requestId } = ev.detail
 
-    this.state = document.monetization && document.monetization.state
+    this.state = (typeof document !== 'undefined') && document.monetization && document.monetization.state
     this.paymentPointer = paymentPointer
     this.requestId = requestId
     this.emit('monetizationstart')
