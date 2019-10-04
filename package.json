@@ -1,6 +1,6 @@
 {
   "name": "react-web-monetization",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "React provider for web monetization",
   "main": "build/react-web-monetization.js",
   "module": "build/react-web-monetization.module.js",
