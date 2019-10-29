@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+
 import { getGlobalWebMonetizationState } from './global'
 
 export function useMonetizationCounter() {
   // get the singleton WM state
   const webMonetizationState = getGlobalWebMonetizationState()
+
   webMonetizationState.init()
 
   const [monetizationDetails, setMonetizationDetails] = useState(
@@ -11,7 +13,7 @@ export function useMonetizationCounter() {
   )
 
   // create something we can mutate
-  const monetizationDetailsCopy = Object.assign({}, monetizationDetails)
+  const monetizationDetailsCopy = { ...monetizationDetails }
 
   useEffect(() => {
     const onMonetizationStart = () => {
