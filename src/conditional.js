@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useMonetizationState } from './state'
 
-export function IfWebMonetized ({ children, showOnPending }) {
+export function IfWebMonetized({ children, showOnPending }) {
   const { state } = useMonetizationState()
 
-  if (state === 'started' || (state === 'pending' && showOnPending )) {
+  if (state === 'started' || (state === 'pending' && showOnPending)) {
     return <>{children}</>
   } else {
     return <></>
   }
 }
 
-export function IfNotWebMonetized ({ children, pendingTimeout = 2000 }) {
-  const [ pendingTimedOut, setPendingTimedOut ] = useState(false)
+export function IfNotWebMonetized({ children, pendingTimeout = 2000 }) {
+  const [pendingTimedOut, setPendingTimedOut] = useState(false)
   const { state } = useMonetizationState()
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function IfNotWebMonetized ({ children, pendingTimeout = 2000 }) {
   }
 }
 
-export function IfWebMonetizationPending ({ children }) {
+export function IfWebMonetizationPending({ children }) {
   const { state } = useMonetizationState()
 
   if (state === 'pending') {
