@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+
 import { useMonetizationState } from './state'
 
 export function IfWebMonetized({ children, showOnPending }) {
