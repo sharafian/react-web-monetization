@@ -2,10 +2,13 @@ import { EventEmitter } from 'events'
 
 // TODO: is there a more elegant pattern for this?
 export class GlobalWebMonetizationState extends EventEmitter {
-  constructor () {
+  constructor() {
     super()
 
-    this.state = (typeof document !== 'undefined') && document.monetization && document.monetization.state
+    this.state =
+      typeof document !== 'undefined' &&
+      document.monetization &&
+      document.monetization.state
     this.paymentPointer = null
     this.requestId = null
     this.assetCode = null
@@ -17,7 +20,7 @@ export class GlobalWebMonetizationState extends EventEmitter {
     this.boundMonetizationProgress = this.onMonetizationProgress.bind(this)
   }
 
-  getState () {
+  getState() {
     return {
       state: this.state,
       paymentPointer: this.paymentPointer,
@@ -28,32 +31,55 @@ export class GlobalWebMonetizationState extends EventEmitter {
     }
   }
 
-  init () {
-    if (!this.initialized && (typeof document !== 'undefined') && document.monetization) {
+  init() {
+    if (
+      !this.initialized &&
+      typeof document !== 'undefined' &&
+      document.monetization
+    ) {
       this.initialized = true
-      document.monetization.addEventListener('monetizationstart', this.boundMonetizationStart)
-      document.monetization.addEventListener('monetizationprogress', this.boundMonetizationProgress)
+      document.monetization.addEventListener(
+        'monetizationstart',
+        this.boundMonetizationStart
+      )
+      document.monetization.addEventListener(
+        'monetizationprogress',
+        this.boundMonetizationProgress
+      )
     }
   }
 
-  terminate () {
-    if (this.initialized && (typeof document !== 'undefined') && document.monetization) {
+  terminate() {
+    if (
+      this.initialized &&
+      typeof document !== 'undefined' &&
+      document.monetization
+    ) {
       this.initialized = false
-      document.monetization.removeEventListener('monetizationstart', this.boundMonetizationStart)
-      document.monetization.removeEventListener('monetizationprogress', this.boundMonetizationProgress)
+      document.monetization.removeEventListener(
+        'monetizationstart',
+        this.boundMonetizationStart
+      )
+      document.monetization.removeEventListener(
+        'monetizationprogress',
+        this.boundMonetizationProgress
+      )
     }
   }
 
-  onMonetizationStart (ev) {
+  onMonetizationStart(ev) {
     const { paymentPointer, requestId } = ev.detail
 
-    this.state = (typeof document !== 'undefined') && document.monetization && document.monetization.state
+    this.state =
+      typeof document !== 'undefined' &&
+      document.monetization &&
+      document.monetization.state
     this.paymentPointer = paymentPointer
     this.requestId = requestId
     this.emit('monetizationstart')
   }
 
-  onMonetizationProgress (ev) {
+  onMonetizationProgress(ev) {
     const { amount, assetCode, assetScale } = ev.detail
 
     this.totalAmount = this.totalAmount + Number(amount)
@@ -64,13 +90,13 @@ export class GlobalWebMonetizationState extends EventEmitter {
 }
 
 let globalWebMonetizationState
-export function getGlobalWebMonetizationState () {
+export function getGlobalWebMonetizationState() {
   if (!globalWebMonetizationState) {
     globalWebMonetizationState = new GlobalWebMonetizationState()
   }
   return globalWebMonetizationState
 }
 
-export function initGlobalWebMonetizationState () {
+export function initGlobalWebMonetizationState() {
   getGlobalWebMonetizationState().init()
 }
