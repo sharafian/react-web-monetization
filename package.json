@@ -19,6 +19,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-app": "^7.0.0",
     "babel-register": "^6.26.0",
+    "prettier": "^1.18.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "rollup": "^1.1.2",
