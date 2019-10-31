@@ -17,7 +17,7 @@ const Hidden = () => {
         thank-you messages or for hiding ads, though!
       </p>
 
-      {state === 'stopped' && <b>Stopped...</b>}
+      {state === 'stopped' && <b>Stopped.</b>}
       {state === 'pending' && <b>Loading...</b>}
       {state === 'started' && <b>Thank you for supporting our site!</b>}
       {!state && <b>[ Use Coil to support our site ]</b>}
