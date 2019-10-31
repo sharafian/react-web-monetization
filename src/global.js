@@ -90,9 +90,8 @@ export class GlobalWebMonetizationState extends EventEmitter {
     }
   }
 
-  onMonetizationStop(ev) {
+  onMonetizationStop() {
     this.setStateFromDocumentMonetization()
-    // TODO
     this.resetState()
     this.emit('monetizationstop')
   }
