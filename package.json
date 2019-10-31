@@ -6,6 +6,7 @@
   "module": "build/react-web-monetization.module.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --write '{src,example}/**/*.js'",
     "build": "NODE_ENV='production' rollup -c rollup.config.babel.js"
   },
   "author": "",
