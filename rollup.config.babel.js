@@ -7,22 +7,17 @@ const globals = {
   'react-dom': 'ReactDOM'
 }
 
-export default {
+const outputTo = process.env.OUTPUT_BUNDLE_TO || `${__dirname}/build`
+
+const config = {
   input: './src/index.js',
 
   output: [
     {
-      file: './build/react-web-monetization.js',
+      file: `${outputTo}/react-web-monetization.js`,
       name: 'ReactWebMonetization',
       sourcemap: true,
       format: 'cjs',
-      globals
-    },
-    {
-      file: './build/react-web-monetization.module.js',
-      name: 'ReactWebMonetization',
-      sourcemap: true,
-      format: 'es',
       globals
     }
   ],
@@ -38,3 +33,15 @@ export default {
     commonjs()
   ]
 }
+
+if (!process.env.NO_MODULE) {
+  config.output.push({
+    file: `${outputTo}/react-web-monetization.module.js`,
+    name: 'ReactWebMonetization',
+    sourcemap: true,
+    format: 'es',
+    globals
+  })
+}
+
+export default config

@@ -34,7 +34,9 @@ export class GlobalWebMonetizationState extends EventEmitter {
       requestId: this.requestId,
       assetCode: this.assetCode,
       assetScale: this.assetScale,
-      totalAmount: this.totalAmount
+      totalAmount: this.totalAmount,
+      // synthetic state
+      hasPaid: this.totalAmount !== 0 || this.state === 'started'
     }
   }
 
@@ -92,7 +94,6 @@ export class GlobalWebMonetizationState extends EventEmitter {
 
   onMonetizationStop() {
     this.setStateFromDocumentMonetization()
-    this.resetState()
     this.emit('monetizationstop')
   }
 
@@ -105,6 +106,10 @@ export class GlobalWebMonetizationState extends EventEmitter {
 
   onMonetizationPending(ev) {
     const { paymentPointer, requestId } = ev.detail
+
+    if (this.requestId !== requestId) {
+      this.resetState()
+    }
 
     this.setStateFromDocumentMonetization()
     this.paymentPointer = paymentPointer
