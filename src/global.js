@@ -93,7 +93,8 @@ export class GlobalWebMonetizationState extends EventEmitter {
   }
 
   onMonetizationStop() {
-    if (!document.head.querySelector('meta[name="monetization"]')) {
+    const metaTag = document.head.querySelector('meta[name="monetization"]')
+    if (!metaTag || metaTag.content !== this.paymentPointer) {
       this.resetState()
     }
 
