@@ -93,6 +93,10 @@ export class GlobalWebMonetizationState extends EventEmitter {
   }
 
   onMonetizationStop() {
+    if (!document.head.querySelector('meta[name="monetization"]')) {
+      this.resetState()
+    }
+
     this.setStateFromDocumentMonetization()
     this.emit('monetizationstop')
   }
