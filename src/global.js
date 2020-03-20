@@ -25,6 +25,7 @@ export class GlobalWebMonetizationState extends EventEmitter {
     this.assetCode = null
     this.assetScale = null
     this.totalAmount = 0
+    this.receipt = null
   }
 
   getState() {
@@ -35,6 +36,7 @@ export class GlobalWebMonetizationState extends EventEmitter {
       assetCode: this.assetCode,
       assetScale: this.assetScale,
       totalAmount: this.totalAmount,
+      receipt: this.receipt,
       // synthetic state
       hasPaid: this.totalAmount !== 0 || this.state === 'started'
     }
@@ -132,11 +134,12 @@ export class GlobalWebMonetizationState extends EventEmitter {
   }
 
   onMonetizationProgress(ev) {
-    const { amount, assetCode, assetScale } = ev.detail
+    const { amount, assetCode, assetScale, receipt } = ev.detail
 
     this.totalAmount = this.totalAmount + Number(amount)
     this.assetCode = assetCode
     this.assetScale = assetScale
+    this.receipt = receipt
     this.emit('monetizationprogress')
   }
 }
